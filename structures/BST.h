@@ -1,11 +1,11 @@
 #ifndef BINARY_SEARCH_TREE
 #define BINARY_SEARCH_TREE
 
+#include "Student.h"
+
 typedef struct BSTNode
 {
-    char firstname[12];
-    char lastname[12];
-    int index;
+    Student student;
     BSTNode *left, *right;
 } BSTNode;
 
