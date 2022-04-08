@@ -1,19 +1,21 @@
 #ifndef ORDERED_LIST
 #define ORDERED_LIST
 
-struct ListElement
+
+
+typedef struct ListNode
 {
     char firstname[12];
     char lastname[12];
     int index;
     struct ListElement *next;
-};
+} ListNode;
 
 
-struct ListHead
+typedef struct List
 {
-    struct ListElement *first;
-};
+    ListNode *first;
+} List;
 
 
 #endif
