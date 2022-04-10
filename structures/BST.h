@@ -19,7 +19,7 @@ BSTNode *insertIntoTree(BSTNode *node, Student *newStudent)
 {
     if (node == NULL)
     {
-        BSTNode *newNode = (BSTNode *)malloc(sizeof(BSTNode));
+        BSTNode *newNode = (BSTNode *)calloc(1, sizeof(BSTNode));
         newNode->student = *newStudent;
         return newNode;
     }

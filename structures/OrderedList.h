@@ -7,7 +7,7 @@
 typedef struct ListNode
 {
     Student student;
-    ListNode *next;
+    struct ListNode *next;
 } ListNode;
 
 typedef struct List
@@ -21,7 +21,7 @@ void deleteFromList(List *list, int index);
 
 void insertIntoList(List *list, Student *newStudent)
 {
-    ListNode *newNode = (ListNode *)malloc(sizeof(ListNode));
+    ListNode *newNode = (ListNode *)calloc(1, sizeof(ListNode));
 
     newNode->student = *newStudent;
 
@@ -29,7 +29,7 @@ void insertIntoList(List *list, Student *newStudent)
     {
         list->first = newNode;
         return;
-    } 
+    }
 
     ListNode *prev = list->first;
 

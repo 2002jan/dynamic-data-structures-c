@@ -6,11 +6,12 @@
 #include <string.h>
 
 #include "structures/Student.h"
+#include "structures/OrderedList.h"
 
 Student *Students;
 
 void initStudetsList(int n);
-
+void buildList(List *list, int n);
 
 void initStudetsList(int n)
 {
@@ -45,12 +46,27 @@ void initStudetsList(int n)
         Students[j].index = atol(token);
         j++;    
     }
-    
-    j = 999999;
 
-    printf("%d. %s %s - %d\n", j + 1, Students[j].firstname, Students[j].lastname, Students[j].index);
+    fclose(fstudents);
+}
 
-    free(token);
+void buildList(List *list, int n)
+{
+    int i = 0;
+
+    if (list->first != NULL)
+    {
+        ListNode *current = list->first;
+        do
+        {
+            i++;
+            current = current->next;
+        } while (current != NULL);
+    }
+
+    for(; i < n; i++){
+        insertIntoList(list, Students + i);
+    }
 }
 
 #endif
