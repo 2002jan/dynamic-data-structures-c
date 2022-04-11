@@ -7,7 +7,7 @@
 typedef struct BSTNode
 {
     Student student;
-    BSTNode *left, *right;
+    struct BSTNode *left, *right;
 } BSTNode;
 
 BSTNode *insertIntoTree(BSTNode *node, Student *newStudent);
@@ -28,7 +28,7 @@ BSTNode *insertIntoTree(BSTNode *node, Student *newStudent)
         node->right = insertIntoTree(node->right, newStudent);
     else
         node->left = insertIntoTree(node->left, newStudent);
-
+        
     return node;
 }
 

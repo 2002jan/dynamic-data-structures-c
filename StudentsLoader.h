@@ -7,11 +7,13 @@
 
 #include "structures/Student.h"
 #include "structures/OrderedList.h"
+#include "structures/BST.h"
 
 Student *Students;
 
 void initStudetsList(int n);
 void buildList(List *list, int n);
+void clearTree(BSTNode *root);
 
 void initStudetsList(int n)
 {
@@ -67,6 +69,30 @@ void buildList(List *list, int n)
     for(; i < n; i++){
         insertIntoList(list, Students + i);
     }
+}
+
+BSTNode *buildTree(int n)
+{
+    int i = 0;
+
+    BSTNode *root = NULL;
+
+    for(; i < n; i++){
+        root = insertIntoTree(root, &Students[i]);
+    }
+
+    printf("%d -> %s\n", i, searchTree(root, Students[i].index)->firstname);
+}
+
+void clearTree(BSTNode *root)
+{
+    if (root == NULL) return;
+
+    clearTree(root->left);
+    clearTree(root->right);
+    free(root);
+
+    return;
 }
 
 #endif

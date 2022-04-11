@@ -4,32 +4,23 @@
 int main()
 {
     initStudetsList(1000000);
-    List *list = calloc(1, sizeof(List));
-
-    ListNode *current, *next;
+    BSTNode *tree = (BSTNode *)calloc(1, sizeof(BSTNode));
 
     printf("Time to insert 50 items into list\n");
 
     for (int j = 1; j <= 100; j += 2)
     {
-        int n = 250 * j;
+        int n = 1000 * j;
 
         clock_t begin = clock();
 
-        buildList(list, n);
+        tree = buildTree(n);
 
         clock_t end = clock();
         printf("%d - %fms\n", n, (double)(end - begin) / CLOCKS_PER_SEC * 1000);
 
-        current = list->first;
-        list->first = NULL;
-
-        while (current != NULL)
-        {
-            next = current->next;
-            free(current);
-            current = next;
-        }
+        clearTree(tree);
+        tree = NULL;
     }
 
     printf("Time to delete n items from list\n");
@@ -38,7 +29,7 @@ int main()
     {
         int n = 250 * j;
 
-        buildList(list, n);
+        tree = buildTree(n);
 
         int toDelete[n];
 
@@ -63,20 +54,14 @@ int main()
 
         for (i = 0; i < n; i++)
         {
-            deleteFromList(list, Students[toDelete[i]].index);
+            tree = deleteFromTree(tree, Students[toDelete[i]].index);
         }
 
         clock_t end = clock();
         printf("%d - %fms\n", n, (double)(end - begin) / CLOCKS_PER_SEC * 1000);
-    }
 
-    current = list->first, *next;
-
-    while (current != NULL)
-    {
-        next = current->next;
-        free(current);
-        current = next;
+        clearTree(tree);
+        tree = NULL;
     }
 
     printf("Avg time to search item from list\n");
@@ -85,7 +70,7 @@ int main()
     {
         int n = 250 * j;
 
-        buildList(list, n);
+        tree = buildTree(n);
 
         int i;
 
@@ -93,14 +78,17 @@ int main()
 
         for (i = 0; i < n; i++)
         {
-            searchList(list, Students[i].index);
+            searchTree(tree, Students[i].index);
         }
 
         clock_t end = clock();
         printf("%d - %fms\n", n, (double)(end - begin) / CLOCKS_PER_SEC * 1000);
+
+        clearTree(tree);
+        tree = NULL;
     }
 
-    free(list);
+    free(tree);
     free(Students);
 
     return 0;
