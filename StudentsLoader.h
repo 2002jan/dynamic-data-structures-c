@@ -81,7 +81,7 @@ BSTNode *buildTree(int n)
         root = insertIntoTree(root, &Students[i]);
     }
 
-    printf("%d -> %s\n", i, searchTree(root, Students[i].index)->firstname);
+    return root;
 }
 
 void clearTree(BSTNode *root)

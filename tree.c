@@ -4,13 +4,13 @@
 int main()
 {
     initStudetsList(1000000);
-    BSTNode *tree = (BSTNode *)calloc(1, sizeof(BSTNode));
+    BSTNode *tree;
 
     printf("Time to insert 50 items into list\n");
 
     for (int j = 1; j <= 100; j += 2)
     {
-        int n = 1000 * j;
+        int n = 5000 * j;
 
         clock_t begin = clock();
 
@@ -27,7 +27,7 @@ int main()
 
     for (int j = 1; j <= 100; j += 2)
     {
-        int n = 250 * j;
+        int n = 5000 * j;
 
         tree = buildTree(n);
 
@@ -68,7 +68,7 @@ int main()
 
     for (int j = 1; j <= 100; j += 2)
     {
-        int n = 250 * j;
+        int n = 5000 * j;
 
         tree = buildTree(n);
 
