@@ -13,7 +13,11 @@ Student *Students;
 
 void initStudetsList(int n);
 void buildList(List *list, int n);
+BSTNode *buildTree(int n);
 void clearTree(BSTNode *root);
+BSTNode *balanceTree(BSTNode *root, int n);
+int storeTreeNodes(BSTNode *root, BSTNode **nodes, int n);
+BSTNode *buildBBST(BSTNode **nodes, int start, int end);
 
 void initStudetsList(int n)
 {
@@ -93,6 +97,39 @@ void clearTree(BSTNode *root)
     free(root);
 
     return;
+}
+
+BSTNode *balanceTree(BSTNode *root, int n)
+{
+    BSTNode **nodes = (BSTNode **)calloc(n, sizeof(BSTNode*));
+
+    n = storeTreeNodes(root, nodes, 0);
+
+    return buildBBST(nodes, 0, n-1);
+}
+
+int storeTreeNodes(BSTNode *root, BSTNode **nodes, int n)
+{
+    if(root == NULL) return n;
+
+    n = storeTreeNodes(root->left, nodes, n);
+    nodes[n++] = root;
+    n = storeTreeNodes(root->right, nodes, n);
+
+    return n;
+}
+
+BSTNode *buildBBST(BSTNode **nodes, int start, int end)
+{
+    if(end < start) return NULL;
+
+    int mid = (start + end) / 2;
+    BSTNode *root = nodes[mid];
+
+    root->left = buildBBST(nodes, start, mid - 1);
+    root->right = buildBBST(nodes, mid + 1, end);
+
+    return root;
 }
 
 #endif

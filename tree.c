@@ -30,6 +30,7 @@ int main()
         int n = 5000 * j;
 
         tree = buildTree(n);
+        tree = balanceTree(tree, n);
 
         int toDelete[n];
 
@@ -71,6 +72,7 @@ int main()
         int n = 5000 * j;
 
         tree = buildTree(n);
+        tree = balanceTree(tree, n);
 
         int i;
 
