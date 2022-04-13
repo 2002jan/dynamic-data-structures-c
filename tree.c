@@ -1,33 +1,48 @@
 #include "StudentsLoader.h"
 #include <time.h>
+#include "csvExporter.h"
 
 int main()
 {
+    int runs = 50;
+
     initStudetsList(1000000);
     BSTNode *tree;
 
+    int *ns; 
+    double *times;
+
+    ns = (int *)calloc(runs, sizeof(int));
+    times = (double *)calloc(runs, sizeof(double));
+
     printf("Time to insert 50 items into list\n");
 
-    for (int j = 1; j <= 100; j += 2)
+    for (int j = 1; j <= runs; j++)
     {
-        int n = 5000 * j;
+        int n = 10000 * j;
 
         clock_t begin = clock();
 
         tree = buildTree(n);
 
         clock_t end = clock();
-        printf("%d - %fms\n", n, (double)(end - begin) / CLOCKS_PER_SEC * 1000);
+        
+        ns[j - 1] = n;
+        times[j - 1] = (double)(end - begin) / CLOCKS_PER_SEC * 1000;
+
+        printf("%d - %fms\n", n, times[j - 1]);
 
         clearTree(tree);
         tree = NULL;
     }
 
+    exportToCsv(ns, times, runs, "BST", "Insertion");
+
     printf("Time to delete n items from list\n");
 
-    for (int j = 1; j <= 100; j += 2)
+    for (int j = 1; j <= runs; j++)
     {
-        int n = 5000 * j;
+        int n = 10000 * j;
 
         tree = buildTree(n);
         tree = balanceTree(tree, n);
@@ -59,17 +74,23 @@ int main()
         }
 
         clock_t end = clock();
-        printf("%d - %fms\n", n, (double)(end - begin) / CLOCKS_PER_SEC * 1000);
+        
+        ns[j - 1] = n;
+        times[j - 1] = (double)(end - begin) / CLOCKS_PER_SEC * 1000;
+
+        printf("%d - %fms\n", n, times[j - 1]);
 
         clearTree(tree);
         tree = NULL;
     }
 
+    exportToCsv(ns, times, runs, "BST", "Deletion");
+
     printf("Avg time to search item from list\n");
 
-    for (int j = 1; j <= 100; j += 2)
+    for (int j = 1; j <= runs; j++)
     {
-        int n = 5000 * j;
+        int n = 10000 * j;
 
         tree = buildTree(n);
         tree = balanceTree(tree, n);
@@ -84,11 +105,17 @@ int main()
         }
 
         clock_t end = clock();
-        printf("%d - %fms\n", n, (double)(end - begin) / CLOCKS_PER_SEC * 1000);
+        
+        ns[j - 1] = n;
+        times[j - 1] = (double)(end - begin) / CLOCKS_PER_SEC * 1000;
+
+        printf("%d - %fms\n", n, times[j - 1]);
 
         clearTree(tree);
         tree = NULL;
     }
+
+    exportToCsv(ns, times, runs, "BST", "Search");
 
     free(tree);
     free(Students);
