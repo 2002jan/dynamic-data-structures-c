@@ -4,7 +4,7 @@
 
 int main()
 {
-    int runs = 50;
+    int runs = 15;
 
     initStudetsList(1000000);
     BSTNode *tree;

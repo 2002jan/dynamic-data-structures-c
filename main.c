@@ -4,7 +4,7 @@
 
 int main()
 {
-    int runs = 50;
+    int runs = 15;
 
     initStudetsList(1000000);
     List *list = calloc(1, sizeof(List));
