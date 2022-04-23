@@ -31,10 +31,19 @@ void insertIntoList(List *list, Student *newStudent)
         return;
     }
 
+    if (list->first->student.index > newStudent->index)
+    {
+        newNode->next = list->first;
+        list->first = newNode;
+        return;
+    }
+    
+
     ListNode *prev = list->first;
 
-    while (prev->next != NULL) prev = prev->next;
-    
+    while (prev->next != NULL && prev->next->student.index < newStudent->index) prev = prev->next;
+
+    newNode->next = prev->next;
     prev->next = newNode;
 
     return;
