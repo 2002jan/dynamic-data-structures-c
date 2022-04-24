@@ -24,6 +24,7 @@ int main()
         clock_t begin = clock();
 
         tree = buildTree(n);
+        tree = balanceTree(tree, n);
 
         clock_t end = clock();
         
@@ -36,7 +37,7 @@ int main()
         tree = NULL;
     }
 
-    exportToCsv(ns, times, runs, "BST", "Insertion");
+    exportToCsv(ns, times, runs, "BBST", "Insertion");
 
     printf("Time to delete n items from list\n");
 
@@ -45,7 +46,7 @@ int main()
         int n = 10000 * j;
 
         tree = buildTree(n);
-        tree = balanceTree(tree, n);
+        // tree = balanceTree(tree, n);
 
         int toDelete[n];
 
@@ -93,7 +94,7 @@ int main()
         int n = 10000 * j;
 
         tree = buildTree(n);
-        tree = balanceTree(tree, n);
+        // tree = balanceTree(tree, n);
 
         int i;
 
