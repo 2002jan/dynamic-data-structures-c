@@ -93,4 +93,52 @@ BSTNode *deleteFromTree(BSTNode *node, int index)
     return node;
 }
 
+void inOrder(BSTNode *node)
+{
+    
+    if (node == NULL)
+    {
+        return;
+    }
+
+    inOrder(node->left);
+    
+    printf("%s %s - %d\n", node->student.firstname, node->student.lastname, node->student.index);
+
+    inOrder(node->right);
+
+}
+
+void preOrder(BSTNode *node)
+{
+    
+    if (node == NULL)
+    {
+        return;
+    }
+    
+    printf("%s %s - %d\n", node->student.firstname, node->student.lastname, node->student.index);
+
+    inOrder(node->left);
+
+    inOrder(node->right);
+
+}
+
+void postOrder(BSTNode *node)
+{
+    
+    if (node == NULL)
+    {
+        return;
+    }
+
+    inOrder(node->left);
+
+    inOrder(node->right);
+    
+    printf("%s %s - %d\n", node->student.firstname, node->student.lastname, node->student.index);
+
+}
+
 #endif
